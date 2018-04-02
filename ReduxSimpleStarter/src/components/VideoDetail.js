@@ -1,6 +1,10 @@
 import React from "react";
 
 const VideoDetail = ({ video }) => {
+  if (!video) {
+    return <div>Loading...</div>
+  }
+  
   const videoTitle = video.snippet.title;
   const videoDescription = video.snippet.description;
   const videoID = video.id.videoId;
