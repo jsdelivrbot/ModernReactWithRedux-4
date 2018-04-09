@@ -1,6 +1,8 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
+import { fetchWeather } from "../actions/";
 
-export default class SearchBar extends Component {
+class SearchBar extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -16,6 +18,8 @@ export default class SearchBar extends Component {
 
   handleFormSubmit(event) {
     event.preventDefault();
+    this.props.fetchWeather(this.state.term);
+    this.setState({ term: "" });
   }
 
   render() {
@@ -36,3 +40,13 @@ export default class SearchBar extends Component {
     );
   }
 }
+
+const mapDispatchToProps = (dispatch, ownProps) => {
+  return {
+    fetchWeather: term => {
+      dispatch(fetchWeather(term));
+    }
+  };
+};
+
+export default connect(null, mapDispatchToProps)(SearchBar);

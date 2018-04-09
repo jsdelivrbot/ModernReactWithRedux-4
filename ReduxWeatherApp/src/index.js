@@ -1,13 +1,15 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
-import { createStore, applyMiddleware } from "redux";
+import { createStore, applyMiddleware, compose } from "redux";
+import ReduxThunk from "redux-thunk";
 
 import App from "./components/app";
 import reducers from "./reducers";
-import reduxPromise from "redux-promise";
+import ReduxPromise from "redux-promise";
+import WeatherList from "./containers/WeatherList";
 
-const createStoreWithMiddleware = applyMiddleware(reduxPromise)(
+const createStoreWithMiddleware = compose(applyMiddleware(ReduxPromise, ReduxThunk))(
   createStore
 );
 
